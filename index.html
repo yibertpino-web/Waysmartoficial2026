@@ -8,7 +8,6 @@
 
 <h2>📘 Menú de Ejercicios</h2>
 
-<!-- MENÚ DESPLEGABLE -->
 <select id="menu" onchange="mostrarEjercicio()">
   <option value="">-- Selecciona una opción --</option>
   <option value="suma">Suma</option>
@@ -20,33 +19,32 @@
 
 <hr>
 
-<!-- SECCIONES -->
 <div id="suma" class="opcion" style="display:none;">
   <h3>Suma</h3>
-  <input id="num1" placeholder="Número 1" type="number">
-  <input id="num2" placeholder="Número 2" type="number">
-  <button onclick="sumar()">Sumar</button>
+  <input id="num1" type="number" placeholder="Número 1">
+  <input id="num2" type="number" placeholder="Número 2">
+  <button onclick="sumarUI()">Sumar</button>
   <p id="resSuma"></p>
 </div>
 
 <div id="par" class="opcion" style="display:none;">
   <h3>Par o impar</h3>
   <input id="numPI" type="number" placeholder="Número">
-  <button onclick="parImpar()">Verificar</button>
+  <button onclick="parImparUI()">Verificar</button>
   <p id="resPI"></p>
 </div>
 
 <div id="tabla" class="opcion" style="display:none;">
   <h3>Tabla de multiplicar</h3>
   <input id="numTabla" type="number" placeholder="Número">
-  <button onclick="tabla()">Generar</button>
+  <button onclick="tablaUI()">Generar</button>
   <pre id="resTabla"></pre>
 </div>
 
 <div id="edad" class="opcion" style="display:none;">
   <h3>Mayor de edad</h3>
   <input id="edadInput" type="number" placeholder="Edad">
-  <button onclick="mayorEdad()">Verificar</button>
+  <button onclick="mayorEdadUI()">Verificar</button>
   <p id="resEdad"></p>
 </div>
 
@@ -54,60 +52,11 @@
   <h3>Ciclo</h3>
   <input id="inicio" type="number" placeholder="Inicio">
   <input id="fin" type="number" placeholder="Fin">
-  <button onclick="ciclo()">Ejecutar</button>
+  <button onclick="cicloUI()">Ejecutar</button>
   <pre id="resCiclo"></pre>
 </div>
 
-<script>
-// MOSTRAR SOLO LA OPCIÓN SELECCIONADA
-function mostrarEjercicio() {
-  let opciones = document.querySelectorAll(".opcion");
-  opciones.forEach(op => op.style.display = "none");
-
-  let valor = document.getElementById("menu").value;
-  if (valor) {
-    document.getElementById(valor).style.display = "block";
-  }
-}
-
-// FUNCIONES
-function sumar() {
-  let a = Number(document.getElementById("num1").value);
-  let b = Number(document.getElementById("num2").value);
-  document.getElementById("resSuma").innerText = a + b;
-}
-
-function parImpar() {
-  let n = Number(document.getElementById("numPI").value);
-  document.getElementById("resPI").innerText =
-    (n % 2 === 0) ? "Es par" : "Es impar";
-}
-
-function tabla() {
-  let n = Number(document.getElementById("numTabla").value);
-  let texto = "";
-  for (let i = 1; i <= 10; i++) {
-    texto += `${n} x ${i} = ${n * i}\n`;
-  }
-  document.getElementById("resTabla").innerText = texto;
-}
-
-function mayorEdad() {
-  let edad = Number(document.getElementById("edadInput").value);
-  document.getElementById("resEdad").innerText =
-    (edad >= 18) ? "Mayor de edad" : "Menor de edad";
-}
-
-function ciclo() {
-  let ini = Number(document.getElementById("inicio").value);
-  let fin = Number(document.getElementById("fin").value);
-  let texto = "";
-  for (let i = ini; i <= fin; i++) {
-    texto += i + " ";
-  }
-  document.getElementById("resCiclo").innerText = texto;
-}
-</script>
+<script src="./ejercicios.js"></script>
 
 </body>
 </html>

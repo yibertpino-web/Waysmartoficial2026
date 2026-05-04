@@ -1,55 +1,65 @@
 console.log("JS conectado correctamente");
 
-// 🧭 Mostrar ejercicios
-function mostrar(n) {
-    for (let i = 1; i <= 5; i++) {
-        document.getElementById("e" + i).style.display = "none";
-    }
-    document.getElementById("e" + n).style.display = "block";
-}
+// 📘 MENÚ
+window.mostrarEjercicio = function () {
+  let opciones = document.querySelectorAll(".opcion");
 
-// 🔢 Ejercicio 1: Suma
-function sumar() {
-    let a = Number(document.getElementById("a").value);
-    let b = Number(document.getElementById("b").value);
-    document.getElementById("res").innerText = a + b;
-}
+  opciones.forEach(op => {
+    op.style.display = "none";
+  });
 
-// 🔢 Ejercicio 2: Par o impar
-function parImpar() {
-    let n = Number(document.getElementById("num").value);
-    document.getElementById("res2").innerText =
-        (n % 2 === 0) ? "Par" : "Impar";
-}
+  let valor = document.getElementById("menu").value;
 
-// ✖️ Ejercicio 3: Tabla
-function tabla() {
-    let n = Number(document.getElementById("tabla").value);
-    let t = "";
+  if (valor) {
+    document.getElementById(valor).style.display = "block";
+  }
+};
 
-    for (let i = 1; i <= 10; i++) {
-        t += `${n} x ${i} = ${n * i}<br>`;
-    }
+// 🔢 SUMA
+window.sumarUI = function () {
+  let a = Number(document.getElementById("num1").value);
+  let b = Number(document.getElementById("num2").value);
 
-    document.getElementById("res3").innerHTML = t;
-}
+  document.getElementById("resSuma").innerText = a + b;
+};
 
-// 🧑‍🎓 Ejercicio 4: Edad
-function edad() {
-    let e = Number(document.getElementById("edad").value);
-    document.getElementById("res4").innerText =
-        (e >= 18) ? "Mayor de edad" : "Menor de edad";
-}
+// 🔀 PAR O IMPAR
+window.parImparUI = function () {
+  let n = Number(document.getElementById("numPI").value);
 
-// 🔁 Ejercicio 5: Ciclo
-function ciclo() {
-    let i = Number(document.getElementById("inicio").value);
-    let f = Number(document.getElementById("fin").value);
+  document.getElementById("resPI").innerText =
+    (n % 2 === 0) ? "Par" : "Impar";
+};
 
-    let r = "";
-    for (let x = i; x <= f; x++) {
-        r += x + " ";
-    }
+// 📊 TABLA
+window.tablaUI = function () {
+  let n = Number(document.getElementById("numTabla").value);
+  let t = "";
 
-    document.getElementById("res5").innerText = r;
-}
+  for (let i = 1; i <= 10; i++) {
+    t += `${n} x ${i} = ${n * i}\n`;
+  }
+
+  document.getElementById("resTabla").innerText = t;
+};
+
+// 🎂 EDAD
+window.mayorEdadUI = function () {
+  let e = Number(document.getElementById("edadInput").value);
+
+  document.getElementById("resEdad").innerText =
+    (e >= 18) ? "Mayor de edad" : "Menor de edad";
+};
+
+// 🔁 CICLO
+window.cicloUI = function () {
+  let ini = Number(document.getElementById("inicio").value);
+  let fin = Number(document.getElementById("fin").value);
+
+  let r = "";
+  for (let i = ini; i <= fin; i++) {
+    r += i + " ";
+  }
+
+  document.getElementById("resCiclo").innerText = r;
+};
