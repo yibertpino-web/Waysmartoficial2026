@@ -63,3 +63,12 @@ window.cicloUI = function () {
 
   document.getElementById("resCiclo").innerText = r;
 };
+function mostrarMenu() {
+  let menu = document.getElementById("menu");
+
+  if (menu.style.display === "block") {
+    menu.style.display = "none";
+  } else {
+    menu.style.display = "block";
+  }
+}
