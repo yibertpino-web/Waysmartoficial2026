@@ -7,7 +7,10 @@
 <body>
 
 <h2>📘 Menú de Ejercicios</h2>
-<button onclick="mostrarMenu()">Testing</button>
+
+<h3>🏆 Puntaje Testing: <span id="score">0</span></h3>
+<h3 id="resultado"></h3>
+
 <select id="menu" onchange="mostrarEjercicio()">
   <option value="">-- Selecciona una opción --</option>
   <option value="suma">Suma</option>
@@ -15,10 +18,12 @@
   <option value="tabla">Tabla de multiplicar</option>
   <option value="edad">Mayor de edad</option>
   <option value="ciclo">Ciclo</option>
+  <option value="test">🧪 Testing</option>
 </select>
 
 <hr>
 
+<!-- SUMA -->
 <div id="suma" class="opcion" style="display:none;">
   <h3>Suma</h3>
   <input id="num1" type="number" placeholder="Número 1">
@@ -27,36 +32,137 @@
   <p id="resSuma"></p>
 </div>
 
+<!-- PAR O IMPAR -->
 <div id="par" class="opcion" style="display:none;">
   <h3>Par o impar</h3>
-  <input id="numPI" type="number" placeholder="Número">
+  <input id="numPI" type="number">
   <button onclick="parImparUI()">Verificar</button>
   <p id="resPI"></p>
 </div>
 
+<!-- TABLA -->
 <div id="tabla" class="opcion" style="display:none;">
   <h3>Tabla de multiplicar</h3>
-  <input id="numTabla" type="number" placeholder="Número">
+  <input id="numTabla" type="number">
   <button onclick="tablaUI()">Generar</button>
   <pre id="resTabla"></pre>
 </div>
 
+<!-- EDAD -->
 <div id="edad" class="opcion" style="display:none;">
   <h3>Mayor de edad</h3>
-  <input id="edadInput" type="number" placeholder="Edad">
+  <input id="edadInput" type="number">
   <button onclick="mayorEdadUI()">Verificar</button>
   <p id="resEdad"></p>
 </div>
 
+<!-- CICLO -->
 <div id="ciclo" class="opcion" style="display:none;">
   <h3>Ciclo</h3>
-  <input id="inicio" type="number" placeholder="Inicio">
-  <input id="fin" type="number" placeholder="Fin">
+  <input id="inicio" type="number">
+  <input id="fin" type="number">
   <button onclick="cicloUI()">Ejecutar</button>
   <pre id="resCiclo"></pre>
 </div>
 
+<!-- 🧪 TESTING -->
+<div id="test" class="opcion" style="display:none;">
+  <h3>🧪 Testing</h3>
+
+  <h4>Pregunta <span id="num">1</span>/3</h4>
+
+  <p id="pregunta"></p>
+
+  <div id="opciones"></div>
+</div>
+
 <script src="./ejercicios.js"></script>
+
+<script>
+let score = 0;
+let actual = 0;
+
+const preguntas = [
+  {
+    texto: "¿Cuánto es 2 + 2?",
+    opciones: ["3", "4", "5"],
+    correcta: 1
+  },
+  {
+    texto: "¿Qué es % en programación?",
+    opciones: ["División", "Módulo", "Multiplicación"],
+    correcta: 1
+  },
+  {
+    texto: "¿Qué es un boolean?",
+    opciones: ["Texto", "Número", "Verdadero/Falso"],
+    correcta: 2
+  }
+];
+
+// MOSTRAR EJERCICIOS
+function mostrarEjercicio() {
+  document.querySelectorAll(".opcion").forEach(e => e.style.display = "none");
+
+  let sel = document.getElementById("menu").value;
+
+  if (sel) {
+    document.getElementById(sel).style.display = "block";
+
+    if (sel === "test") {
+      actual = 0;
+      score = 0;
+      document.getElementById("score").textContent = 0;
+      document.getElementById("resultado").textContent = "";
+      mostrarPregunta();
+    }
+  }
+}
+
+// TESTING
+function mostrarPregunta() {
+  let p = preguntas[actual];
+
+  document.getElementById("num").textContent = actual + 1;
+  document.getElementById("pregunta").textContent = p.texto;
+
+  let cont = document.getElementById("opciones");
+  cont.innerHTML = "";
+
+  p.opciones.forEach((op, i) => {
+    let btn = document.createElement("button");
+    btn.textContent = op;
+    btn.onclick = () => responder(i);
+    cont.appendChild(btn);
+  });
+}
+
+function responder(i) {
+  if (i === preguntas[actual].correcta) {
+    score++;
+  }
+
+  actual++;
+
+  if (actual < preguntas.length) {
+    mostrarPregunta();
+  } else {
+    mostrarResultado();
+  }
+
+  document.getElementById("score").textContent = score;
+}
+
+function mostrarResultado() {
+  let nota = (score / preguntas.length) * 100;
+
+  document.getElementById("pregunta").textContent = "Examen terminado";
+  document.getElementById("opciones").innerHTML = "";
+
+  document.getElementById("resultado").textContent =
+    "Nota: " + nota + (nota >= 70 ? " 🎉 Aprobado" : " ❌ Reprobado");
+}
+</script>
 
 </body>
 </html>
